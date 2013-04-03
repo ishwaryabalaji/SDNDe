@@ -1,0 +1,513 @@
+/** Add css rules here for your application. */
+/** Example rules used by the template application (remove for your app) */
+h1 {
+	font-size: 2em;
+	font-weight: bold;
+	color: #777777;
+	margin: 40px 0px 70px;
+	text-align: center;
+}
+
+body {
+	background: none repeat scroll 0 0 #F1F3F6;
+	color: #77787B;
+	font: 11px Helvetica, Arial, Geneva, sans-serif;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+#menu-css li {
+	display: inline;
+	list-style: none;
+}
+
+#menu-css li a { /* Border Radius */
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	/* Border Shadow */
+	-webkit-box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.6);
+	-moz-box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.6);
+	box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.6);
+	color: #ffffff;
+	background: #F47920;
+	display: inline-block;
+	padding: 5px 15px;
+	outline: none;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.button {
+	padding: 3 3 3 3;
+font-size:10px;
+font-weight:bold;
+	color:#fff;
+width: 60px;
+height:27px;
+-moz-border-radius: 0.5em;
+-webkit-border-radius: 0.5em;
+border-top: 4px solid #ccc;
+border-left: 4px solid #ccc;
+border-right: 4px solid #ccc;
+border-bottom: 4px solid #aaa;
+-moz-border-top-colors:#3b3b3b #6d6d6d #535353 #494949;
+-moz-border-right-colors:#2d2d2d #484848 #484848 #414141;
+-moz-border-left-colors:#2d2d2d #484848 #484848 #414141;
+-moz-border-bottom-colors:#111111 #484848 #484848 #414141;
+background: #414141 url(‘buttonBg.png’) repeat-x top center;
+display: inline;
+}
+
+.fl{
+	float: right;
+	position: absolute;
+	top: 15%;
+	left:84%;
+}
+
+.buttonDisabled {
+padding: 8px 4px;
+font-family: ‘DroidSans-Bold’;
+color:#999;
+width: 50px;
+-moz-border-radius: 0.5em;
+-webkit-border-radius: 0.5em;
+border-top: 4px solid #ccc;
+border-left: 4px solid #ccc;
+border-right: 4px solid #ccc;
+border-bottom: 4px solid #aaa;
+-moz-border-top-colors:#3b3b3b #6d6d6d #535353 #494949;
+-moz-border-right-colors:#3b3b3b #484848 #484848 #414141;
+-moz-border-left-colors:#3b3b3b #484848 #484848 #414141;
+-moz-border-bottom-colors:#2d2d2d #484848 #484848 #414141;
+background: #414141 url(‘buttonBg.png’) repeat-x top center;
+display: inline;
+}
+
+.buttonPressed {
+font-size:10px;
+font-weight:bold;
+color:#fff;
+width: 60px;
+height:20px;
+-moz-border-radius: 0.5em;
+-webkit-border-radius: 0.5em;
+border-top: 8px solid #ccc;
+border-left: 8px solid #ccc;
+border-right: 8px solid #ccc;
+border-bottom: 9px solid #aaa;
+-moz-border-top-colors:#323232 #111111 #111111 #1f1f1f #272727 #2a2a2a #2c2c2c #2d2d2d;
+-moz-border-right-colors:#323232 #111111 #1f1f1f #272727 #292929 #2a2a2a #2c2c2c #2d2d2d;
+-moz-border-left-colors:#323232 #111111 #1f1f1f #272727 #292929 #2a2a2a #2c2c2c #2d2d2d;
+-moz-border-bottom-colors:#515151 #111111 #1f1f1f #272727 #292929 #2a2a2a #2c2c2c #2d2d2d;
+background-color: #2d2d2d;
+display: inline;
+}
+
+.styled-select select {
+	background: transparent;
+	width: 268px;
+	padding: 5px;
+	font-size: 16px;
+	line-height: 1;
+	border: 0;
+	border-radius: 0;
+	height: 34px;
+	-webkit-appearance: none;
+}
+
+.s-hidden {
+  visibility:hidden;
+  padding-right:10px;
+}
+
+.select {
+  cursor:pointer;
+  display:inline-block;
+  position:relative;
+  font:normal 11px/22px Arial,Sans-Serif;
+  color:black;
+  border:1px solid #ccc;
+}
+
+.styledSelect {
+  position:absolute;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  background-color:white;
+  padding:0 10px;
+  font-weight:bold;
+}
+
+.styledSelect:after {
+  content:"";
+  width:0;
+  height:0;
+  border:5px solid transparent;
+  border-color:black transparent transparent transparent;
+  position:absolute;
+  top:9px;
+  right:6px;
+}
+
+.styledSelect:active,
+.styledSelect.active {
+  background-color:#eee;
+}
+
+textarea
+{
+width: 600px;
+height: 400px;
+border-radius: 3px;
+border: 1px solid #CCC;
+padding: 8px;
+font-weight: 200;
+font-size: 15px;
+font-family: Verdana;
+box-shadow: 1px 1px 5px #CCC;
+}
+textarea:hover
+{
+width: 400px;
+height: 190px;
+border-radius: 3px;
+border: 1px solid #aaa;
+padding: 8px;
+font-weight: 200;
+font-size: 15px;
+font-family: Verdana;
+box-shadow: 1px 1px 5px #CCC;
+}
+
+.options {
+  display:none;
+  position:absolute;
+  top:100%;
+  right:0;
+  left:0;
+  z-index:999;
+  margin:0 0;
+  padding:0 0;
+  list-style:none;
+  border:1px solid #ccc;
+  background-color:white;
+  -webkit-box-shadow:0 1px 2px rgba(0,0,0,0.2);
+  -moz-box-shadow:0 1px 2px rgba(0,0,0,0.2);
+  box-shadow:0 1px 2px rgba(0,0,0,0.2);
+}
+
+.options li {
+  padding:0 6px;
+  margin:0 0;
+  padding:0 10px;
+}
+
+.options li:hover {
+  background-color:#39f;
+  color:white;
+}
+
+
+.sendButton {
+	display: block;
+	font-size: 16pt;
+}
+
+/** Most GWT widgets already have a style name defined */
+.dialogVPanel {
+	margin: 5px;
+}
+
+.serverResponseLabelError {
+	color: red;
+}
+
+/** Set ids using widget.getElement().setId("idOfElement") */
+#closeButton {
+	margin: 15px 6px 6px;
+}
+
+/* Login Page reg contents */
+.loginPanel {
+	background-color: #d7efa5;
+	height: 300px;
+	width: 300px;
+	position: absolute;
+	top: 20%;
+	left: 35%;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	border-style: solid;
+	border-width: 12px;
+	border-color: f0f8dd;
+}
+
+.loginPanel span {
+	display: block;
+	margin-bottom: 10px;
+}
+
+.loginPanel div {
+	position: relative;
+	top: 7%;
+	left: 28%;
+}
+
+.loginPanel input {
+	height: 35px;
+	width: 140px;
+	font-size: 16px;
+	text-indent: 3px;
+}
+
+.heading {
+	font-size: 30px;
+	font-family: cursive;
+	top: 10%;
+	left: 42%;	
+	color: #F47920;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.loginPanel input:focus {
+	border: 2px solid #789533
+}
+
+.loginPanel input.red {
+	border: 2px solid #810714
+}
+
+input.red {
+	border: 2px solid #810714
+}
+
+.gry {
+	background-color: #f4f9e9;
+}
+
+.clsBtns {
+	left: 43px;
+	margin-top: 40px;
+}
+
+.btns {
+	background-color: #eff8d9;
+	height: 30px;
+	width: 100px;
+	text-align: center;
+	line-height: 28px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.output{
+	
+	margin-top: 20px;
+}
+
+.components{
+	padding: 10 10 10 10;
+}
+
+.btns:hover {
+	background-position: 0 center;
+}
+
+.btns:active {
+	background-position: 0 top;
+	position: relative;
+	top: 1px;
+}
+
+/* Tasks Main Page */
+.tasksBox {
+	background-color: #d7efa5;
+	height: auto;
+	width: 70%;
+	position: absolute;
+	top: 10%;
+	left: 15%;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	border-style: solid;
+	border-width: 12px;
+	border-color: f0f8dd;
+}
+
+.headingPanel span.head {
+	display: block;
+	margin: 20px;
+}
+
+.taskSelector {
+	padding: 5px 10px;
+	display: inline;
+	background: #f3fae3 url(images/taskSelector.png) repeat-x bottom;
+	border: none;
+	color: #777;
+	cursor: pointer;
+	font-weight: normal;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+.taskSelector:hover {
+	background-position: 0 center;
+}
+
+.taskSelector:active {
+	background-position: 0 top;
+	position: relative;
+	top: 1px;
+	padding: 6px 10px 4px;
+}
+
+.taskSelector.green {
+	background-color: #99ab67;
+	color: #000;
+}
+
+.taskSelector.orange {
+	background-color: #ff9c00;
+}
+
+.taskSelector.blue {
+	background-color: #2c6da0;
+	color: white;
+}
+
+.taskSelector.white {
+	background-color: #fff;
+	color: #000;
+	text-shadow: 1px 1px #fff;
+}
+
+div.row {
+	background-color: #EFF8D9;
+	display: block;
+	height: auto;
+	line-height: 3;
+	font-size: 14px;
+	margin: 20px 0 15px 20px;
+	text-indent: 5px;
+	width: 96%;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+div.row input {
+	margin-left: 5px;
+	margin-right: 15px;
+}
+
+div.tasks {
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
+
+div.tasks hr {
+	width: 95%;
+	height: 5px;
+	background-color: #D2DABE;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border: none;
+}
+
+div.rowheader {
+	font-family: cursive;
+	font-size: 17px;
+	margin-left: 20px;
+	margin-top: 10px;
+}
+
+.prir {
+	float: right;
+	margin-right: 20px;
+	margin-top: 10px;
+	cursor: pointer;
+}
+
+.edit {
+	float: right;
+	margin-top: 13px;
+	cursor: pointer;
+}
+
+.sh {
+	visibility: hidden;
+}
+
+/* add task pop */
+.addTask {
+	background-color: #e8f5c7;
+	border-radius: 6px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	margin: 40px;
+	padding: 20px;
+	font-size: 13px;
+}
+
+.addTask span {
+	display: block;
+	margin: 10px;
+}
+
+.editTask {
+	margin: 20px;
+	padding: 10px;
+}
+
+.editTask span {
+	display: block;
+	margin: 10px;
+}
+
+.editTask .taskSelector {
+	height: 18px;
+	line-height: 18px;
+}
+
+div.addTask hr {
+	width: 100%;
+	height: 5px;
+	background-color: #D2DABE;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border: none;
+}
+
+p.red {
+	font-size: 10;
+	color: #810714;
+}
+
+span.red {
+	font-size: 10;
+	color: #810714;
+}
+
+div.rowmsg {
+	padding: 20px;
+	font-size: 12px;
+	font-family: verdana;
+}
+
+div.ui-datepicker {
+	font-size: 10px;
+}
