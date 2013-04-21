@@ -11,10 +11,12 @@ import java.math.BigInteger;
 import java.net.Inet4Address;
 import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
+import java.util.AbstractMap;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import net.beaconcontroller.core.IBeaconProvider;
 import net.beaconcontroller.core.IOFMessageListener;
@@ -51,7 +53,7 @@ public class LearningSwitchTutorial implements IOFMessageListener,
     protected static Logger log = LoggerFactory
             .getLogger(LearningSwitchTutorial.class);
     protected IBeaconProvider beaconProvider;
-    protected Map<IOFSwitch, Map<Long, Short>> macTables = new HashMap<IOFSwitch, Map<Long, Short>>();
+    protected static Map<IOFSwitch, Map<Long, Short>> macTables = new HashMap<IOFSwitch, Map<Long, Short>>();
     private static DBControllerUtil db;
     
 
@@ -71,6 +73,8 @@ public class LearningSwitchTutorial implements IOFMessageListener,
          * (see below), comment out the above call to forwardAsHub, and
          * uncomment the call here to forwardAsLearningSwitch.
          */
+
+        
         forwardAsLearningSwitch(sw, pi);
         return Command.CONTINUE;
     }
@@ -85,7 +89,7 @@ public class LearningSwitchTutorial implements IOFMessageListener,
      *            the OpenFlow Packet In object
      * @throws IOException
      */
-    public void forwardAsHub(IOFSwitch sw, OFPacketIn pi) throws IOException {
+    public static void forwardAsHub(IOFSwitch sw, OFPacketIn pi) throws IOException {
         // Create the OFPacketOut OpenFlow object
         OFPacketOut po = new OFPacketOut();
 
@@ -201,7 +205,7 @@ public class LearningSwitchTutorial implements IOFMessageListener,
      * forwardAsHub(sw, pi); //} }
      */
 
-    public void forwardAsLearningSwitch(IOFSwitch sw, OFPacketIn pi)
+    public static void forwardAsLearningSwitch(IOFSwitch sw, OFPacketIn pi)
             throws IOException {
         Map<Long, Short> macTable = macTables.get(sw);
 
@@ -220,16 +224,29 @@ public class LearningSwitchTutorial implements IOFMessageListener,
         byte[] dlSrc = match.getDataLayerSource();
         Long dlSrcId = Ethernet.toLong(dlSrc);
         int bufferId = pi.getBufferId();
-
+        
       //  JSONObject doc = new JSONObject();
        HashMap doc = new HashMap();
         doc.put(("OF_PACKETS_DEST"),dlDstId);
         doc.put(("OF_PACKETS_SRC"),dlSrcId);
         doc.put(("OF_PACKETS_SRCPORT"),match.getInputPort());
-        doc.put(("OF_PACKETS_NETSRC"),Inet4Address.getByAddress(BigInteger.valueOf(
-                match.getNetworkSource()).toByteArray()).toString());
-        doc.put(("OF_PACKETS_NETDEST"),Inet4Address.getByAddress(BigInteger.valueOf(
-                match.getNetworkDestination()).toByteArray()).toString());
+        if(outPort != null) {
+            doc.put(("OF_PACKETS_DESTPORT"), outPort);
+        } else
+        {
+            doc.put(("OF_PACKETS_DESTPORT"), "Flood");
+        }
+        
+        String netSrc = Inet4Address.getByAddress(BigInteger.valueOf(match.getNetworkSource()).toByteArray()).toString();
+        netSrc = netSrc.substring(1, netSrc.length());
+        //doc.put(("OF_PACKETS_NETSRC"),Inet4Address.getByAddress(BigInteger.valueOf(match.getNetworkSource()).toByteArray()).toString());
+        doc.put(("OF_PACKETS_NETSRC"),netSrc);
+        String netDest = Inet4Address.getByAddress(BigInteger.valueOf(match.getNetworkDestination()).toByteArray()).toString();
+        netDest = netDest.substring(1,netDest.length());
+        
+        	doc.put(("OF_PACKETS_NETDEST"),Inet4Address.getByAddress(BigInteger.valueOf(match.getNetworkDestination()).toByteArray()).toString());
+       
+        doc.put(("OF_PACKETS_NETDEST"),netDest);
         doc.put(("OF_PACKETS_SWITCHID"),sw.getId());
         ByteBuffer datap = ByteBuffer.allocate(pi.getLength());
         pi.writeTo(datap);
@@ -260,12 +277,57 @@ public class LearningSwitchTutorial implements IOFMessageListener,
             System.out.println("IP::"+ipd.getIdentification());
             doc.put(("OF_PACKETS_IDEN"),(Short)ipd.getIdentification());
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         
         System.out.println("5 " + pi.getPacketData());
         
         
+        
+        //SDNDe sdnde = new SDNDe(db);
+        
+        if(Settings.isSet() && Settings.BREAKPOINT.equals(Settings.getFnName())
+        		&& String.valueOf(sw.getId()).equals(Settings.getSid())
+        		&& doc.get("OF_PACKETS_NETSRC").equals(Settings.getSrc())
+        		&& doc.get("OF_PACKETS_NETDEST").equals(Settings.getDest())){
+        	Settings.bkQ.add(new AbstractMap.SimpleEntry(sw,new AbstractMap.SimpleEntry(pi, doc)));
+        	System.out.println("In BreakPoint:"+Settings.bkQ.size());
+        	for(Entry e:Settings.bkQ)
+        		System.out.println("Entry:"+e.getKey()+"="+e.getValue());
+        	SocketServer.sendAsyncPacket(Settings.BREAKPOINT,null);
+        	return;
+        	
+        }else if(Settings.isSet() && Settings.MONITOR.equals(Settings.getFnName())
+        		&& String.valueOf(sw.getId()).equals(Settings.getSid())
+        		&& doc.get("OF_PACKETS_NETSRC").equals(Settings.getSrc())
+        		&& doc.get("OF_PACKETS_NETDEST").equals(Settings.getDest())){
+        	//Settings.bkQ.add(new AbstractMap.SimpleEntry(sw,new AbstractMap.SimpleEntry(pi, doc)));
+        	//Settings.bkQ.put((Long)sw.getId(), new AbstractMap.SimpleEntry(sw,pi));
+        	//System.out.println("In Monitor:"+Settings.bkQ.size());
+        	//for(Entry e:Settings.bkQ)
+        		//System.out.println("Entry:"+e.getKey()+"="+e.getValue());
+        	SocketServer.sendAsyncPacket(Settings.MONITOR,doc);
+        	//return;
+        }else if(Settings.isSet() && Settings.STEP.equals(Settings.getFnName())
+        		&& doc.get("OF_PACKETS_NETSRC").equals(Settings.getSrc())
+        		&& doc.get("OF_PACKETS_NETDEST").equals(Settings.getDest())){
+        	/*synchronized (Settings.bkQ) {
+        		Settings.bkQ.add(new AbstractMap.SimpleEntry(sw,new AbstractMap.SimpleEntry(pi, doc)));
+            	System.out.println("In Step:"+Settings.bkQ.size());
+            	for(Entry e:Settings.bkQ)
+            		System.out.println("Entry:"+e.getKey()+"="+e.getValue());
+			}*/
+        	
+        	
+        	SocketServer.sendAsyncPacket(Settings.STEP,null);
+			if (!Settings.getSid().equals(String.valueOf(sw.getId()))) {
+				Settings.setFnName(Settings.BREAKPOINT);
+				Settings.setSid(String.valueOf(sw.getId()));
+				Settings.bkQ.add(new AbstractMap.SimpleEntry(sw,new AbstractMap.SimpleEntry(pi, doc)));
+				return;
+			}
+        	
+        }
         db.createPacketInDB(doc);
         
         if (outPort != null) {
@@ -341,6 +403,7 @@ public class LearningSwitchTutorial implements IOFMessageListener,
     public void startUp() throws UnknownHostException {
         log.trace("Starting");
         db=new DBControllerUtil();
+        new SDNDe(db);
         db.refreshDB();
         beaconProvider.addOFMessageListener(OFType.PACKET_IN, this);
         beaconProvider.addOFMessageListener(OFType.FLOW_MOD, this);

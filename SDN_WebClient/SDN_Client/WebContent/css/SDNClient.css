@@ -16,6 +16,14 @@ body {
 	padding: 0;
 	text-align: center;
 }
+.ui-state-active{
+		color: #FFFFFF;
+	background: #F47920;		
+}
+
+#radio{
+	margin-top:20px;
+}
 
 #menu-css li {
 	display: inline;
@@ -281,11 +289,15 @@ box-shadow: 1px 1px 5px #CCC;
 }
 
 .loginPanel input.red {
-	border: 2px solid #810714
+	border: 2px solid red
+}
+
+.red{
+	border-color: red;
 }
 
 input.red {
-	border: 2px solid #810714
+	border: 2px solid red
 }
 
 .gry {
@@ -312,6 +324,9 @@ input.red {
 .output{
 	
 	margin-top: 20px;
+	font-size: 14px;
+    font-weight: bold;
+    margin-top: 20px;
 }
 
 .components{
@@ -510,4 +525,34 @@ div.rowmsg {
 
 div.ui-datepicker {
 	font-size: 10px;
+}
+
+.display{
+	background-color: #EEEEEE;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	width: 90%;
+	padding: 5px;
+	font-style: 12px;
+	text-align: center;
+}
+.opDivs{
+	width:95%;
+	padding: 25px;
+	
+}
+
+
+.dataTables_length {
+    float: left;
+    width: 14%;
+    padding: 6px;    
+}
+
+.dataTables_filter{
+	float: right;
+    text-align: right;
+    width: 50%;
+    padding: 5px;	
 }

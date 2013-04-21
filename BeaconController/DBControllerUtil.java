@@ -34,7 +34,7 @@ public class DBControllerUtil {
 	private final static String OF_PACKETS_PACKETTYPE = "PTYPE";
 	private final static String OF_PACKETS_SWITCHID = "SID";
 	private final static String OF_PACKETS_IDEN = "IDENTIFIER";
-	
+	private SocketServer sock ;
 	/*********** Managing DB CONNECTIONS ***************/
 
 	public DBControllerUtil() throws UnknownHostException {
@@ -43,8 +43,11 @@ public class DBControllerUtil {
 		// object will be a connection to a MongoDB server for the specified
 		// database.
 		mongoObj = new Mongo("127.0.0.1", 27017);
-
-		// get a intsance to db
+		sock = new SocketServer();
+		String configXML = System.getProperty("configXML");
+		String jWebHome = System.getProperty("jWebHome");
+		sock.startConnection(configXML, jWebHome);
+		// get a instance to db
 		db = mongoObj.getDB("ControllerSDNData");
 		}catch(Exception exp){
 			exp.printStackTrace();
@@ -74,7 +77,7 @@ public class DBControllerUtil {
         doc.put(OF_PACKETS_NETSRC, tweetJson.get("OF_PACKETS_NETSRC"));
         
         doc.put(OF_PACKETS_SRCPORT, tweetJson.get("OF_PACKETS_SRCPORT")); // Input port
-		//doc.put(OF_PACKETS_DESTPORT, tweetJson.get("OF_PACKETS_DESTPORT"));
+		doc.put(OF_PACKETS_DESTPORT, tweetJson.get("OF_PACKETS_DESTPORT"));
 		//doc.put(OF_PACKETS_MSGID, tweetJson.get("OF_PACKETS_MSGID"));
 		doc.put(OF_PACKETS_OBJ, tweetJson.get("OF_PACKETS_OBJ"));
 		doc.put(OF_PACKETS_PACKETTYPE, tweetJson.get("OF_PACKETS_PACKETTYPE"));
