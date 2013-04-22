@@ -27,6 +27,6 @@ NOTES
  
 Demo Video 
 ==========
-Part 1 - http://youtu.be/2AiLGF6Doyg
+Part 1 - http://youtu.be/5635I5wE2-4
 
-Part 2 - http://youtu.be/wQrC57n0Fbw
+Part 2 - http://youtu.be/6JnKNUunNkc
