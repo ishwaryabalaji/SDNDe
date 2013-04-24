@@ -29,4 +29,4 @@ Demo Video
 ==========
 Part 1 - http://youtu.be/5635I5wE2-4
 
-Part 2 - http://youtu.be/6JnKNUunNkc
+Part 2 - http://youtu.be/_Ov1WhepbB8
